@@ -2,6 +2,7 @@ package com.humberto.workshopmongodb.config;
 
 import com.humberto.workshopmongodb.domain.Post;
 import com.humberto.workshopmongodb.domain.User;
+import com.humberto.workshopmongodb.dto.AuthorDTO;
 import com.humberto.workshopmongodb.repository.PostRepository;
 import com.humberto.workshopmongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +31,15 @@ public class Instantiation implements CommandLineRunner {
         userReposiroty.deleteAll();
         postReposiroty.deleteAll();
 
-        User maria = new User(null, "Maria Brown", "maria@gmail.com");
+        User maria = new User(null, "Maria2 Brown", "maria@gmail.com");
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", maria);
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", maria);
-
         userReposiroty.saveAll(Arrays.asList(maria, alex, bob));
+
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+
         postReposiroty.saveAll(Arrays.asList(post1, post2));
     }
 
